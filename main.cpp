@@ -23,8 +23,8 @@ int main() {
             cout << "\n--- Menu de gestion de candidatos ---" << endl;
             cout << "1. Registrar candidato" << endl;
             cout << "2. Mostrar candidatos" << endl;
-            cout << "4. Eliminar candidato"<< endl;
-            cout << "5. Salir" << endl;
+            cout << "3. Eliminar candidato"<< endl;
+            cout << "4. Salir" << endl;
             cout << "Elige una opcion: ";
             cin >> opcion;
 
@@ -51,7 +51,7 @@ int main() {
                     inscripcion.MostrarCandidatos();
                     break;
                 case 3:
-                    cout << "Ingrese la cédula del candidato a eliminar: ";
+                    cout << "Ingrese la cedula del candidato a eliminar: ";
                     cin >> cedEliminar;
                     inscripcion.EliminarCandidato(cedEliminar);
                     break;
