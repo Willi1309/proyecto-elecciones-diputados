@@ -1,8 +1,8 @@
 #include "Candidato.h"
 
-Candidato::Candidato(){
-    
+Candidato::Candidato() {
 }
+
 Candidato::Candidato(const string& ced, const string& nom, const string& ape, int partidoId)
     : cedula(ced), nombre(nom), apellido(ape), idPartido(partidoId), votos(0) // Inicializa los atributos
 {
@@ -10,67 +10,64 @@ Candidato::Candidato(const string& ced, const string& nom, const string& ape, in
     pilaEstatus.InsComienzo("Activo");
 }
 
-void Candidato::setNombre(string nomb)
-{
-	nombre = nomb;
+void Candidato::setCedula(string ced) {
+    cedula = ced;
 }
 
-string Candidato::getNombre()
-{
-	return nombre;
+string Candidato::getCedula() {
+    return cedula;
 }
 
-
-/*Partido Candidato::getPartido()
-{
-	return partido;
-
-}*/
-
-/*int Candidato::getIdPartido(){
-	return partido.id;
-}*/
-
-void Candidato::setIdPartido(int idprd){
-    idPartido=idprd;
+void Candidato::setNombre(string nomb) {
+    nombre = nomb;
 }
 
-int Candidato::getIdPartido(){
-	return idPartido;
+string Candidato::getNombre() {
+    return nombre;
 }
 
-string Candidato::getNombrePartido(){
-        return nombresPartidos[idPartido-1];
-    }
+void Candidato::setApellido(string apel) {
+    apellido = apel;
+}
 
-string Candidato::getEstatus(){
-	string est;  // Se declara una variable de tipo string
+string Candidato::getApellido() {
+    return apellido;
+}
+
+void Candidato::setIdPartido(int idprd) {
+    idPartido = idprd;
+}
+
+int Candidato::getIdPartido() {
+    return idPartido;
+}
+
+string Candidato::getNombrePartido() {
+    return nombresPartidos[idPartido - 1];
+}
+
+string Candidato::getEstatus() {
+    string est;  // Se declara una variable de tipo string
     pilaEstatus.EliComienzo(est);  // Se intenta eliminar el estado de la pila y se almacena en 'estatus'
     pilaEstatus.InsComienzo(est);  // Se vuelve a insertar el estado eliminado en la pila
     return est;  // Se retorna el estado
 }
 
-void Candidato::ModificarEstatus(string nuevoEstatus)
-{
-
+void Candidato::ModificarEstatus(string nuevoEstatus) {
     string est;
 
-    if (!pilaEstatus.Vacia())
-    {
-		pilaEstatus.EliComienzo(est);
+    if (!pilaEstatus.Vacia()) {
+        pilaEstatus.EliComienzo(est);
     }
 
     pilaEstatus.InsComienzo(nuevoEstatus);
-
 }
 
-
-void Candidato::setEstatusInicial()
-{
+void Candidato::setEstatusInicial() {
     pilaEstatus.InsComienzo("Activo");
 }
-void Candidato::mostrarInformacion(){
-	cout << "Nombre: " << nombre << endl;
-    cout << "Partido: " << getNombrePartido() << endl;}
-		
 
+void Candidato::mostrarInformacion() {
+    cout << "Nombre: " << nombre << endl;
+    cout << "Partido: " << getNombrePartido() << endl;
+}
