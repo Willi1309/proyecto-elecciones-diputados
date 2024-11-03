@@ -41,6 +41,9 @@ public:
     string getNombrePartido();
 
     void mostrarInformacion();
+
+    // Operador de igualdad
+    bool operator==(const Candidato& other) const;
 };
 
 #endif // CANDIDATO_H

@@ -71,3 +71,10 @@ void Candidato::mostrarInformacion() {
     cout << "Nombre: " << nombre << endl;
     cout << "Partido: " << getNombrePartido() << endl;
 }
+
+bool Candidato::operator==(const Candidato& other) const {
+    return cedula == other.cedula &&
+           nombre == other.nombre &&
+           apellido == other.apellido &&
+           idPartido == other.idPartido;
+}
