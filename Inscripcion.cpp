@@ -1,134 +1,128 @@
 #include "Inscripcion.h"
+#include <iostream>
 
-Inscripcion::Inscripcion(){
-
+Inscripcion::Inscripcion() {
+    std::cout << "Constructor de Inscripcion llamado." << std::endl; // Mensaje de depuración
+    //Candidato aux;
+    //candidatos.InsComienzo(aux);
+    std::cout << "cola candidatos " << candidatos.ObtPrimero() << std::endl; // Mensaje de depuración
 }
 
-
- Candidato Inscripcion::CrearMarca()
-{
-
-	Candidato candidatos;
-	string ced, nomb, apel;
-	int votos, idprd;
-	
-    //int votos;
-
-	ced = "-1";
-	nomb = "$$$$$";
-	apel = "$$$$$";
-	votos =-1;
-	idprd = -1;
-    //votos= -1;
-
-
-	candidatos.setCedula(ced);
-	candidatos.setNombre(nomb);
-	candidatos.setApellido(apel);
-	candidatos.setIdPartido(idprd);
-	candidatos.setEstatusInicial();
-
-	return candidatos;
+void mensaje(){
+    std::cout << "mensaje de objeto inscripcion." << std::endl; // Mensaje de depuración
 }
 
-void Inscripcion::RegistrarCandidato(Candidato cand)
-{
-	if (cand.getIdPartido() < 0 || cand.getIdPartido() >= 5) {
-        cout << "ID de partido no válido." << endl;
-        return;
+Candidato Inscripcion::CrearMarca() {
+    Candidato candidatos;
+    string ced, nomb, apel;
+    int votos, idprd;
+
+    ced = "-999999999999";
+    nomb = "$$$$$";
+    apel = "$$$$$";
+    votos = -999999999999;
+    idprd = -999999999999;
+
+    candidatos.setCedula(ced);
+    candidatos.setNombre(nomb);
+    candidatos.setApellido(apel);
+    candidatos.setIdPartido(idprd);
+    //candidatos.setEstatusInicial();
+
+    return candidatos;
+}
+
+bool Inscripcion::verificarDisponibilidad(Candidato cand){
+    if (cand.getIdPartido() < 0 || cand.getIdPartido() >= 5) {
+        std::cout << "ID de partido no válido." << std::endl;
+        return false;
     }
     if (candidatosPorPartido[cand.getIdPartido()] >= 5) {
-        cout << "El partido ya tiene 5 candidatos inscritos." << endl;
-        return;
+        std::cout << "El partido ya tiene 5 candidatos inscritos." << std::endl;
+        return false;
     }
     if (candidatos.Contar() >= 25) {
-        cout << "Se alcanzó el máximo de 25 candidatos." << endl;
-        return;
+        std::cout << "Se alcanzó el máximo de 25 candidatos." << std::endl;
+        return false;
     }
 
-    // Crear e insertar el candidato en la cola
-    //Candidato nuevoCandidato(cedula, nombre, apellido, idPartido);
-    //cand.setEstatusInicial();
-    candidatos.InsertarNodoCola(cand);
-
-    candidatosPorPartido[cand.getIdPartido()]++;
-    cout << "Candidato inscrito exitosamente." << endl;
+    std::cout << "\n Disponibilidad Aprobada" << std::endl; // Mensaje de depuración
+    return true;
 }
 
+void Inscripcion::RegistrarCandidato(Candidato cand) {
+    std::cout << "\n Entrando a RegistrarCandidato." << std::endl; // Mensaje de depuración
 
-void Inscripcion::EliminarCandidato(string cedCandidato)
-{
+    std::cout << "\n Antes de insertar en la cola." << std::endl; // Mensaje de depuración
+    //candidatos.InsComienzo(cand);
+    candidatos.InsertarNodoCola(cand);
+    std::cout << "Después de insertar en la cola." << std::endl; // Mensaje de depuración
+    candidatosPorPartido[cand.getIdPartido()]++;
+    std::cout << "Candidato inscrito exitosamente en RegistrarCandidato." << std::endl; // Mensaje de depuración
+}
 
-	Candidato candAux, marca;
-	bool encontrado = false;
-	//bool candEliminado = false;
-	marca = CrearMarca();
+void Inscripcion::EliminarCandidato(string cedCandidato) {
+    std::cout << "Entrando a EliminarCandidato." << std::endl; // Mensaje de depuración
+    Candidato candAux, marca;
+    bool encontrado = false;
+    marca = CrearMarca();
 
-	//lista temporal para almacenar los candidatos que no fueron eliminados
-	Lista<Candidato> temp;
+    Lista<Candidato> temp;
 
-	if (candidatos.Llena())
-	{
-		//insertamos un marcador al final para marcar el final de la cola
-		candidatos.InsertarNodoCola(marca);
+    if (!candidatos.Llena()) {
 
-		while (!encontrado)
-		{
-			//Remueve al primer candidato de la cola y se guarda en la cola temporal
-			candidatos.RemoverNodoCola(candAux);
+        //revisar
+        candidatos.InsertarNodoCola(marca);
 
-			//Si la cedula del candidto en la cola temporal es igual a la cedula de la marca
-			//entonces encontramos el marcador en la cola orignal
-			//significa que hemos terminado de recorres la cola y salimos del bucle
-			if (candAux.getCedula() == marca.getCedula())
-			{
-				encontrado = true;
-			}
-			else
-			{
-				//en caso contrario,si la cedula del candidato actual tiene la ced 
-				//que queremos eliminar
-				if (candAux.getCedula() == cedCandidato)
-				{
-					cout << "\n\nCandidato eliminado\n\n";
-					encontrado = true; //se indica que lo encontramos y no lo volvemos a insertar
-					//en la cola original
-					candidatosPorPartido[candAux.getIdPartido()]; // Actualizamos el contador de candidatos por partido
-				}
-				else
-				{
-					//si no es el candidato que queremos eliminar, se reinserta al final de la cola
-					temp.InsertarNodoCola(candAux);
-				}
-			}
-		}
+        while (!encontrado) {
 
-		 // Ahora reinserta todos los candidatos de la cola temporal a la cola original en el orden original
-    	while (!temp.Vacia()) {
-        
-        temp.RemoverNodoCola(candAux);
-		candidatos.InsertarNodoCola(candAux);
-    	}
-	}
+            //revisar
+            candidatos.RemoverNodoCola(candAux);
 
-	if (!encontrado) {
-        cout << "Candidato no encontrado." << endl;
+            if (candAux.getCedula() == marca.getCedula()) {
+                encontrado = true;
+            } else {
+                if (candAux.getCedula() == cedCandidato) {
+                    std::cout << "\n\nCandidato eliminado\n\n";
+                    encontrado = true;
+                    candidatosPorPartido[candAux.getIdPartido()]; // Actualizamos el contador de candidatos por partido
+                } else {
+
+
+
+                    temp.InsertarNodoCola(candAux);
+                }
+            }
+        }
+
+        while (!temp.Vacia()) {
+
+
+            //revisar
+            temp.RemoverNodoCola(candAux);
+            candidatos.InsertarNodoCola(candAux);
+        }
     }
 
+    if (!encontrado) {
+        std::cout << "Candidato no encontrado." << std::endl;
+    }
 }
 
 void Inscripcion::MostrarCandidatos() {
-        nodo<Candidato>* actual = candidatos.ObtPrimero();
-        if (!actual) {
-            cout << "No hay candidatos inscritos en la cola." << endl;
-            return;
-        }
-
-        cout << "Candidatos inscritos:" << endl;
-		while (actual) {
-        Candidato candidatoActual = candidatos.ObtInfo(actual); // Usar ObtInfo aquí
-        candidatoActual.mostrarInformacion(); // Mostrar la información del candidato
-        actual = candidatos.ObtProx(actual); // Mover al siguiente nodo
+    std::cout << "Entrando a MostrarCandidatos." << std::endl; // Mensaje de depuración
+    nodo<Candidato>* actual = candidatos.ObtPrimero();
+    if (!actual) {
+        std::cout << "No hay candidatos inscritos en la cola." << std::endl;
+        return;
     }
-}
+
+    std::cout << "Candidatos inscritos:" << std::endl;
+    while (actual) {
+        Candidato candidatoActual = candidatos.ObtInfo(actual);
+        candidatoActual.mostrarInformacion();
+        actual = candidatos.ObtProx(actual);
+    }
+
     
+}
