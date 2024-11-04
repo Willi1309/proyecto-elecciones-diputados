@@ -108,3 +108,43 @@ void Inscripcion::MostrarCandidatos() {
         actual = candidatos.ObtProx(actual);
     }
 }
+
+Candidato Inscripcion::BuscarCandidato(string ced) {
+
+    if (candidatos.Vacia()) cout << "Lista vacia" << endl;
+    Candidato encontrado;
+    // crear marca 
+    Candidato marca;
+
+    marca = CrearMarca();
+
+    marca.getCedula() = "$$$";
+
+    candidatos.InsFinal(marca);
+
+    while (candidatos.ObtInfo(candidatos.ObtPrimero()).getCedula() != marca.getCedula()) {
+        Candidato actual = candidatos.ObtInfo(candidatos.ObtPrimero());
+
+        if (actual.getCedula() == ced) {
+            encontrado = actual;
+        }
+
+        candidatos.InsFinal(actual);
+        candidatos.AsigPrimero(candidatos.ObtProx(candidatos.ObtPrimero()));
+
+
+    }
+
+    Candidato primero = candidatos.ObtInfo(candidatos.ObtPrimero());
+    if (primero.getCedula() == marca.getCedula()) {
+        candidatos.EliComienzo(marca);
+        // cout << "eliminada la marca!" << endl; 
+    }
+
+    if (encontrado.getNombre().empty()) {
+        cout << "Candidato no encontrado" << endl;
+        return Candidato();
+    }
+
+    return encontrado;
+}

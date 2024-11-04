@@ -274,6 +274,39 @@ bool Lista<Tipo>::InsertarNodoCola(Tipo Valor) {
     }
 };
 
+template <class Tipo>
+bool Lista<Tipo>::InsFinal(Tipo Valor) {
+    Apuntador nuevo;
+    if (!Llena()) {
+        nuevo = new nodo<Tipo>;
+        if (nuevo == nullptr) {
+            // Manejar error de asignación de memoria
+            return false;
+        }
+        nuevo->info = Valor;
+        nuevo->prox = nullptr; // Inicializar prox a nullptr
+
+        if (Vacia()) {
+            Primero = nuevo;
+            Final = Primero;
+            return true; // Retorno temprano para simplificar la lógica
+        }
+
+        Final->prox = nuevo;
+        Final = nuevo;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+template <class Tipo>
+nodo<Tipo>* Lista<Tipo>::ObtFinal() {
+    return Final;
+}
+
 // Explicit instantiation
 template class Lista<std::string>;
 template class Lista<Candidato>;

@@ -24,8 +24,9 @@ int main() {
             cout << "\n--- Menu de gestion de candidatos ---" << endl;
             cout << "1. Registrar candidato" << endl;
             cout << "2. Mostrar candidatos" << endl;
-            cout << "3. Eliminar candidato" << endl;
-            cout << "4. Salir" << endl;
+            cout << "3. Buscar candidato" << endl;
+            cout << "4. Eliminar candidato" << endl;
+            cout << "5. Salir" << endl;
             cout << "Elige una opcion: ";
             cin >> opcion;
             cin.ignore(); // Limpiar el buffer de entrada
@@ -62,15 +63,37 @@ int main() {
                 case 2:
                     inscripcion.MostrarCandidatos();
                     break;
-                case 3:
+                case 3: {
+
+                    string cedulaCandidato;
+                    cout << "Ingrese la cedula del candidato" << endl;
+                    //cin.ignore();
+                    getline(cin, cedulaCandidato);
+
+                    Candidato candi = inscripcion.BuscarCandidato(cedulaCandidato);
+                    if (!candi.getNombre().empty())
+                    {
+                        cout << "Candidato encontrado: " << endl;
+                        cout << " Cedula: " << candi.getCedula();
+                        cout << " Nombre Completo: " << candi.getNombre() << " " << candi.getApellido();
+                        cout << " Partido: " << candi.getNombrePartido();
+                        cout << " Status: " << candi.getEstatus() << endl;
+                    }
+                    break;
+
+                }
+                    
+                case 4:
                     cout << "Ingrese la cedula del candidato a eliminar: ";
                     cin >> cedEliminar;
                     cin.ignore(); // Limpiar el buffer de entrada
                     inscripcion.EliminarCandidato(cedEliminar);
                     break;
-                case 4:
+
+                case 5:
                     cout << "Saliendo del sistema de gestion de candidatos." << endl;
                     break;
+
                 default:
                     cout << "Opcion no valida. Intenta de nuevo." << endl;
             }
