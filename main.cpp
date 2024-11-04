@@ -47,27 +47,27 @@ int main() {
 
                     Candidato candidato(cedula, nombre, apellido, idPartido);
                     cout << "Registrando candidato: " << candidato.getCedula() << ", " << candidato.getNombre() << ", " << candidato.getApellido() << ", " << candidato.getNombrePartido()<< endl;
-                    cout << "Candidato creado." << endl; // Mensaje de depuración
+
                     
                     if(inscripcion.verificarDisponibilidad(candidato)){
                         inscripcion.RegistrarCandidato(candidato);
                         cout << "Candidato registrado exitosamente." << endl; // Mensaje de depuración
                         break;
                     } else {
-                        cout << "No Disponible para insercion" << endl; // Mensaje de depuración
+                        cout << "No se registro el candidato" << endl; // Mensaje de depuración
                         break;
                     }
                     
                 }
                 case 2:
                     inscripcion.MostrarCandidatos();
-                    break;;
+                    break;
                 case 3:
                     cout << "Ingrese la cedula del candidato a eliminar: ";
                     cin >> cedEliminar;
                     cin.ignore(); // Limpiar el buffer de entrada
                     inscripcion.EliminarCandidato(cedEliminar);
-                    break;;;
+                    break;
                 case 4:
                     cout << "Saliendo del sistema de gestion de candidatos." << endl;
                     break;

@@ -1,12 +1,7 @@
 #include "Inscripcion.h"
 #include <iostream>
 
-Inscripcion::Inscripcion() {
-    std::cout << "Constructor de Inscripcion llamado." << std::endl; // Mensaje de depuración
-    //Candidato aux;
-    //candidatos.InsComienzo(aux);
-    std::cout << "cola candidatos " << candidatos.ObtPrimero() << std::endl; // Mensaje de depuración
-}
+Inscripcion::Inscripcion() {}
 
 void mensaje(){
     std::cout << "mensaje de objeto inscripcion." << std::endl; // Mensaje de depuración
@@ -51,23 +46,18 @@ bool Inscripcion::verificarDisponibilidad(Candidato cand){
 }
 
 void Inscripcion::RegistrarCandidato(Candidato cand) {
-    std::cout << "\n Entrando a RegistrarCandidato." << std::endl; // Mensaje de depuración
 
-    std::cout << "\n Antes de insertar en la cola." << std::endl; // Mensaje de depuración
-    //candidatos.InsComienzo(cand);
     candidatos.InsertarNodoCola(cand);
-    std::cout << "Después de insertar en la cola." << std::endl; // Mensaje de depuración
+
     candidatosPorPartido[cand.getIdPartido()]++;
     std::cout << "Candidato inscrito exitosamente en RegistrarCandidato." << std::endl; // Mensaje de depuración
 }
 
 void Inscripcion::EliminarCandidato(string cedCandidato) {
-    std::cout << "Entrando a EliminarCandidato." << std::endl; // Mensaje de depuración
+
     Candidato candAux, marca;
     bool encontrado = false;
     marca = CrearMarca();
-
-  //Lista<Candidato> temp;
 
     if (!candidatos.Llena()) {
 
@@ -77,55 +67,32 @@ void Inscripcion::EliminarCandidato(string cedCandidato) {
 
             candidatos.RemoverNodoCola(candAux);
 
-            if (candAux.getCedula() == marca.getCedula()) {
-               break;
-            }
+            if (candAux.getCedula() == marca.getCedula()) { break; }
 
             if (candAux.getCedula() == cedCandidato) {
 
                     std::cout << "\n\nCandidato eliminado\n\n";
                     encontrado = true;
                     candidatosPorPartido[candAux.getIdPartido()]; // Actualizamos el contador de candidatos por partido
-                } else {
 
-                    candidatos.InsertarNodoCola(candAux);
-                  //temp.InsertarNodoCola(candAux);
-                }
-            }
-        if (!encontrado) {
-            std::cout << "Candidato no encontrado." << std::endl;
+            } else { candidatos.InsertarNodoCola(candAux); }
         }
-
-        }
-/*
-        while (!temp.Vacia()) {
-
-            temp.RemoverNodoCola(candAux);
-            candidatos.InsertarNodoCola(candAux);
-        }
-
+        if (!encontrado) { std::cout << "Candidato no encontrado." << std::endl; }
     }
-
-    if (!encontrado) {
-        std::cout << "Candidato no encontrado." << std::endl;
-    }
-    */
 }
 
 void Inscripcion::MostrarCandidatos() {
-    std::cout << "Entrando a MostrarCandidatos." << std::endl; // Mensaje de depuración
+
     nodo<Candidato>* actual = candidatos.ObtPrimero();
     if (!actual) {
         std::cout << "No hay candidatos inscritos en la cola." << std::endl;
         return;
     }
 
-    std::cout << "Candidatos inscritos:" << std::endl;
+    std::cout << "Candidatos inscritos: \n" << std::endl;
     while (actual) {
         Candidato candidatoActual = candidatos.ObtInfo(actual);
         candidatoActual.mostrarInformacion();
         actual = candidatos.ObtProx(actual);
     }
-
-    
 }
