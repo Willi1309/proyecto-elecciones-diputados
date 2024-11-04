@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/arnal/OneDrive/Escritorio/proyecto-elecciones-diputados
+# Install script for directory: C:/Users/arnal/OneDrive/Escritorio/REPOSITORIO DIPUTADOS/PROYECTO NO NUMERICA/proyecto-elecciones-diputados
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/arnal/OneDrive/Escritorio/proyecto-elecciones-diputados/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/arnal/OneDrive/Escritorio/REPOSITORIO DIPUTADOS/PROYECTO NO NUMERICA/proyecto-elecciones-diputados/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

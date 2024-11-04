@@ -15,7 +15,6 @@ template <class Tipo>
 Lista<Tipo>::Lista() {
     Primero = NULL;
     Final = NULL; // Asegurarse de inicializar Final
-    std::cout << "Constructor de Lista llamado." << std::endl; // Mensaje de depuración
 };
 /*
 template <class Tipo>
@@ -226,7 +225,7 @@ void Lista<Tipo>::pasarListaAux(Lista<Tipo> &listaFuente, Lista<Tipo> &listaDest
 
 template <class Tipo>
 bool Lista<Tipo>::RemoverNodoCola(Tipo &Valor) {
-    std::cout << "Entrando a RemoverNodoCola." << std::endl; // Mensaje de depuración
+
     Apuntador viejo;
     // verificar si la lista no estaa vacia
     if (!Vacia()) {
@@ -236,37 +235,31 @@ bool Lista<Tipo>::RemoverNodoCola(Tipo &Valor) {
         if (Primero == NULL)
             Final = NULL;
         delete viejo;
-        std::cout << "Nodo removido de la cola." << std::endl; // Mensaje de depuración
+
         return true;
-    } else {
-        std::cout << "Cola vacía, no se puede remover nodo." << std::endl; // Mensaje de depuración
-        return false;
     }
+    return false;
+
 };
 
 template <class Tipo>
 bool Lista<Tipo>::InsertarNodoCola(Tipo Valor) {
-    std::cout << "Entrando a InsertarNodoCola." << std::endl; // Mensaje de depuración
+
     Apuntador nuevo;
 
     // verificar si la lista no estaa llena
     if (!Llena()) {
-        std::cout << "Memoria suficiente para insertar nodo." << std::endl; // Mensaje de depuración
         
         // crear un nodo
         nuevo = new nodo<Tipo>;
-        std::cout << "Nodo creado." << std::endl; // Mensaje de depuración
         nuevo->info = Valor;
         nuevo->prox = NULL;
         if (Final == NULL) {
             Primero = nuevo;
-            std::cout << "Insertando primer nodo en la cola." << std::endl; // Mensaje de depuración
         } else {
             Final->prox = nuevo;
-            std::cout << "Insertando nodo al final de la cola." << std::endl; // Mensaje de depuración
         }
         Final = nuevo;
-        std::cout << "Nodo insertado en la cola." << std::endl; // Mensaje de depuración
         return true;
     } else {
         std::cout << "Memoria insuficiente para insertar nodo." << std::endl; // Mensaje de depuración

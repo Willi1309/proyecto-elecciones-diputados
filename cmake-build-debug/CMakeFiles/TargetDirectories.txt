@@ -1,3 +1,3 @@
-C:/Users/arnal/OneDrive/Escritorio/proyecto-elecciones-diputados/cmake-build-debug/CMakeFiles/proyecto_elecciones_diputados.dir
-C:/Users/arnal/OneDrive/Escritorio/proyecto-elecciones-diputados/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/arnal/OneDrive/Escritorio/proyecto-elecciones-diputados/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/arnal/OneDrive/Escritorio/REPOSITORIO DIPUTADOS/PROYECTO NO NUMERICA/proyecto-elecciones-diputados/cmake-build-debug/CMakeFiles/proyecto_elecciones_diputados.dir
+C:/Users/arnal/OneDrive/Escritorio/REPOSITORIO DIPUTADOS/PROYECTO NO NUMERICA/proyecto-elecciones-diputados/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/arnal/OneDrive/Escritorio/REPOSITORIO DIPUTADOS/PROYECTO NO NUMERICA/proyecto-elecciones-diputados/cmake-build-debug/CMakeFiles/rebuild_cache.dir

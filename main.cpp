@@ -97,7 +97,7 @@ int main() {
                 default:
                     cout << "Opcion no valida. Intenta de nuevo." << endl;
             }
-        } while (opcion == 1 || opcion == 2 || opcion == 3);
+        } while (opcion != 5);
     } else if (opcionInicial == 2) {
         cout << "Saliendo del programa." << endl;
     } else {
