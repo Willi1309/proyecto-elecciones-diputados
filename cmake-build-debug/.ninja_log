@@ -1,0 +1,11 @@
+# ninja log v6
+10	869	7523875313090978	CMakeFiles/proyecto_elecciones_diputados.dir/Libreria/Nodo.cpp.obj	ab08cd1340ac50ac
+31	898	7523875313301915	CMakeFiles/proyecto_elecciones_diputados.dir/main.cpp.obj	995260ed1aa17995
+17	906	7523875313161087	CMakeFiles/proyecto_elecciones_diputados.dir/Candidato.cpp.obj	de274035a22297bf
+23	952	7523875313226508	CMakeFiles/proyecto_elecciones_diputados.dir/Inscripcion.cpp.obj	ca2fabae85cff5a
+4	968	7523875313025808	CMakeFiles/proyecto_elecciones_diputados.dir/Libreria/Lista.cpp.obj	8770419b73012496
+968	1138	7523875322675392	proyecto_elecciones_diputados.exe	28bbc528e3d2b4c3
+13	694	7523886692212665	CMakeFiles/proyecto_elecciones_diputados.dir/Inscripcion.cpp.obj	ca2fabae85cff5a
+695	883	7523886699044227	proyecto_elecciones_diputados.exe	28bbc528e3d2b4c3
+13	766	7523893662547458	CMakeFiles/proyecto_elecciones_diputados.dir/Inscripcion.cpp.obj	ca2fabae85cff5a
+767	949	7523893670088558	proyecto_elecciones_diputados.exe	28bbc528e3d2b4c3

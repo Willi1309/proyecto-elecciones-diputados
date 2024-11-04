@@ -1,12 +1,7 @@
 #include "Inscripcion.h"
 #include <iostream>
 
-Inscripcion::Inscripcion() {
-    std::cout << "Constructor de Inscripcion llamado." << std::endl; // Mensaje de depuración
-    //Candidato aux;
-    //candidatos.InsComienzo(aux);
-    std::cout << "cola candidatos " << candidatos.ObtPrimero() << std::endl; // Mensaje de depuración
-}
+Inscripcion::Inscripcion() {}
 
 void mensaje(){
     std::cout << "mensaje de objeto inscripcion." << std::endl; // Mensaje de depuración
@@ -51,86 +46,65 @@ bool Inscripcion::verificarDisponibilidad(Candidato cand){
 }
 
 void Inscripcion::RegistrarCandidato(Candidato cand) {
-    std::cout << "\n Entrando a RegistrarCandidato." << std::endl; // Mensaje de depuración
 
-    std::cout << "\n Antes de insertar en la cola." << std::endl; // Mensaje de depuración
-    //candidatos.InsComienzo(cand);
     candidatos.InsertarNodoCola(cand);
-    std::cout << "Después de insertar en la cola." << std::endl; // Mensaje de depuración
+
     candidatosPorPartido[cand.getIdPartido()]++;
     std::cout << "Candidato inscrito exitosamente en RegistrarCandidato." << std::endl; // Mensaje de depuración
 }
 
 void Inscripcion::EliminarCandidato(string cedCandidato) {
+
+
     std::cout << "Entrando a EliminarCandidato." << std::endl; // Mensaje de depuración
     // Declara dos objetos de tipo Candidato: candAux y marca
+
     Candidato candAux, marca;
     // Declara una variable booleana para indicar si se encontró el candidato
     bool encontrado = false;
     // Crea un objeto "marca" que se usará como marcador
     marca = CrearMarca();
 
-    // Declara una lista temporal de candidatos
-    Lista<Candidato> temp;
-
-    // Verifica si la lista de candidatos no está llena
+// Verifica si la lista de candidatos no está llena
     if (!candidatos.Llena()) {
-
-        // Inserta el marcador al final de la lista de candidatos
+// Inserta el marcador al final de la lista de candidatos
         candidatos.InsertarNodoCola(marca);
+ // Mientras no se haya encontrado el candidato
+        while (true){
 
-        // Mientras no se haya encontrado el candidato
-        while (!encontrado) {
-
-            // Remueve el último nodo de la lista de candidatos y lo almacena en candAux
+           // Remueve el último nodo de la lista de candidatos y lo almacena en candAux
             candidatos.RemoverNodoCola(candAux);
+          
+          // Si el candidato removido es el marcador, se ha llegado al final de la lista
 
-            // Si el candidato removido es el marcador, se ha llegado al final de la lista
-            if (candAux.getCedula() == marca.getCedula()) {
-                encontrado = true;
-            } else {
-                // Si el candidato removido tiene la cédula que se quiere eliminar
-                if (candAux.getCedula() == cedCandidato) {
+            if (candAux.getCedula() == marca.getCedula()) { break; }
+
+           // Si el candidato removido tiene la cédula que se quiere eliminar
+            if (candAux.getCedula() == cedCandidato) {
+
                     std::cout << "\n\nCandidato eliminado\n\n";
                     encontrado = true;
-                    // Actualiza el contador de candidatos por partido
-                    candidatosPorPartido[candAux.getIdPartido()]--;
-                } else {
-                    // Si no es el candidato a eliminar, se inserta en la lista auxiliar
-                    temp.InsertarNodoCola(candAux);
-                }
-            }
+                    candidatosPorPartido[candAux.getIdPartido()]; // Actualizamos el contador de candidatos por partido
+// Si no es el candidato a eliminar, se reinserta en lalista
+            } else { candidatos.InsertarNodoCola(candAux); }
         }
-
-        // Mientras la lista auxiliar no esté vacía
-        while (!temp.Vacia()) {
-            // Remueve el último nodo de la lista auxiliar y lo almacena en candAux
-            temp.RemoverNodoCola(candAux);
-            // Inserta el candidato de vuelta en la lista original
-            candidatos.InsertarNodoCola(candAux);
-        }
-    }
-
-    // Si no se encontró el candidato, se imprime un mensaje
-    if (!encontrado) {
-        std::cout << "Candidato no encontrado." << std::endl;
+      // Si no se encontró el candidato, se imprime un mensaje
+        if (!encontrado) { std::cout << "Candidato no encontrado." << std::endl; }
     }
 }
 
 void Inscripcion::MostrarCandidatos() {
-    std::cout << "Entrando a MostrarCandidatos." << std::endl; // Mensaje de depuración
+
     nodo<Candidato>* actual = candidatos.ObtPrimero();
     if (!actual) {
         std::cout << "No hay candidatos inscritos en la cola." << std::endl;
         return;
     }
 
-    std::cout << "Candidatos inscritos:" << std::endl;
+    std::cout << "Candidatos inscritos: \n" << std::endl;
     while (actual) {
         Candidato candidatoActual = candidatos.ObtInfo(actual);
         candidatoActual.mostrarInformacion();
         actual = candidatos.ObtProx(actual);
     }
-
-    
 }
