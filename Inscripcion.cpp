@@ -55,28 +55,40 @@ void Inscripcion::RegistrarCandidato(Candidato cand) {
 
 void Inscripcion::EliminarCandidato(string cedCandidato) {
 
+
+    std::cout << "Entrando a EliminarCandidato." << std::endl; // Mensaje de depuración
+    // Declara dos objetos de tipo Candidato: candAux y marca
+
     Candidato candAux, marca;
+    // Declara una variable booleana para indicar si se encontró el candidato
     bool encontrado = false;
+    // Crea un objeto "marca" que se usará como marcador
     marca = CrearMarca();
 
+// Verifica si la lista de candidatos no está llena
     if (!candidatos.Llena()) {
-
+// Inserta el marcador al final de la lista de candidatos
         candidatos.InsertarNodoCola(marca);
-
+ // Mientras no se haya encontrado el candidato
         while (true){
 
+           // Remueve el último nodo de la lista de candidatos y lo almacena en candAux
             candidatos.RemoverNodoCola(candAux);
+          
+          // Si el candidato removido es el marcador, se ha llegado al final de la lista
 
             if (candAux.getCedula() == marca.getCedula()) { break; }
 
+           // Si el candidato removido tiene la cédula que se quiere eliminar
             if (candAux.getCedula() == cedCandidato) {
 
                     std::cout << "\n\nCandidato eliminado\n\n";
                     encontrado = true;
                     candidatosPorPartido[candAux.getIdPartido()]; // Actualizamos el contador de candidatos por partido
-
+// Si no es el candidato a eliminar, se reinserta en lalista
             } else { candidatos.InsertarNodoCola(candAux); }
         }
+      // Si no se encontró el candidato, se imprime un mensaje
         if (!encontrado) { std::cout << "Candidato no encontrado." << std::endl; }
     }
 }
