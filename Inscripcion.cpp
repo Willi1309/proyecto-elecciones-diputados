@@ -63,47 +63,55 @@ void Inscripcion::RegistrarCandidato(Candidato cand) {
 
 void Inscripcion::EliminarCandidato(string cedCandidato) {
     std::cout << "Entrando a EliminarCandidato." << std::endl; // Mensaje de depuración
+    // Declara dos objetos de tipo Candidato: candAux y marca
     Candidato candAux, marca;
+    // Declara una variable booleana para indicar si se encontró el candidato
     bool encontrado = false;
+    // Crea un objeto "marca" que se usará como marcador
     marca = CrearMarca();
 
+    // Declara una lista temporal de candidatos
     Lista<Candidato> temp;
 
+    // Verifica si la lista de candidatos no está llena
     if (!candidatos.Llena()) {
 
-        //revisar
+        // Inserta el marcador al final de la lista de candidatos
         candidatos.InsertarNodoCola(marca);
 
+        // Mientras no se haya encontrado el candidato
         while (!encontrado) {
 
-            //revisar
+            // Remueve el último nodo de la lista de candidatos y lo almacena en candAux
             candidatos.RemoverNodoCola(candAux);
 
+            // Si el candidato removido es el marcador, se ha llegado al final de la lista
             if (candAux.getCedula() == marca.getCedula()) {
                 encontrado = true;
             } else {
+                // Si el candidato removido tiene la cédula que se quiere eliminar
                 if (candAux.getCedula() == cedCandidato) {
                     std::cout << "\n\nCandidato eliminado\n\n";
                     encontrado = true;
-                    candidatosPorPartido[candAux.getIdPartido()]; // Actualizamos el contador de candidatos por partido
+                    // Actualiza el contador de candidatos por partido
+                    candidatosPorPartido[candAux.getIdPartido()]--;
                 } else {
-
-
-
+                    // Si no es el candidato a eliminar, se inserta en la lista auxiliar
                     temp.InsertarNodoCola(candAux);
                 }
             }
         }
 
+        // Mientras la lista auxiliar no esté vacía
         while (!temp.Vacia()) {
-
-
-            //revisar
+            // Remueve el último nodo de la lista auxiliar y lo almacena en candAux
             temp.RemoverNodoCola(candAux);
+            // Inserta el candidato de vuelta en la lista original
             candidatos.InsertarNodoCola(candAux);
         }
     }
 
+    // Si no se encontró el candidato, se imprime un mensaje
     if (!encontrado) {
         std::cout << "Candidato no encontrado." << std::endl;
     }
