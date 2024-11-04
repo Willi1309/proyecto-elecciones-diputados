@@ -67,46 +67,49 @@ void Inscripcion::EliminarCandidato(string cedCandidato) {
     bool encontrado = false;
     marca = CrearMarca();
 
-    Lista<Candidato> temp;
+  //Lista<Candidato> temp;
 
     if (!candidatos.Llena()) {
 
-        //revisar
         candidatos.InsertarNodoCola(marca);
 
-        while (!encontrado) {
+        while (true){
 
-            //revisar
             candidatos.RemoverNodoCola(candAux);
 
             if (candAux.getCedula() == marca.getCedula()) {
-                encontrado = true;
-            } else {
-                if (candAux.getCedula() == cedCandidato) {
+               break;
+            }
+
+            if (candAux.getCedula() == cedCandidato) {
+
                     std::cout << "\n\nCandidato eliminado\n\n";
                     encontrado = true;
                     candidatosPorPartido[candAux.getIdPartido()]; // Actualizamos el contador de candidatos por partido
                 } else {
 
-
-
-                    temp.InsertarNodoCola(candAux);
+                    candidatos.InsertarNodoCola(candAux);
+                  //temp.InsertarNodoCola(candAux);
                 }
             }
+        if (!encontrado) {
+            std::cout << "Candidato no encontrado." << std::endl;
         }
 
+        }
+/*
         while (!temp.Vacia()) {
 
-
-            //revisar
             temp.RemoverNodoCola(candAux);
             candidatos.InsertarNodoCola(candAux);
         }
+
     }
 
     if (!encontrado) {
         std::cout << "Candidato no encontrado." << std::endl;
     }
+    */
 }
 
 void Inscripcion::MostrarCandidatos() {

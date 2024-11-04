@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.29)
+project(proyecto_elecciones_diputados)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(.)
+include_directories(Libreria)
+
+add_executable(proyecto_elecciones_diputados
+    Libreria/Lista.cpp
+    Libreria/Lista.h
+    Libreria/Nodo.cpp
+    Libreria/Nodo.h
+    Candidato.cpp
+    Candidato.h
+    Inscripcion.cpp
+    Inscripcion.h
+    main.cpp)
