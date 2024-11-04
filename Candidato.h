@@ -10,7 +10,7 @@ class Candidato {
 private:
     string cedula, nombre, apellido, partido;
     int idPartido, votos;
-    Lista<string> pilaEstatus;
+    //Lista<string> pilaEstatus;
     string nombresPartidos[5] = {"Partido A", "Partido B", "Partido C", "Partido D", "Partido E"};
 
 public:
@@ -41,6 +41,9 @@ public:
     string getNombrePartido();
 
     void mostrarInformacion();
+
+    // Operador de igualdad
+    bool operator==(const Candidato& other) const;
 };
 
 #endif // CANDIDATO_H
