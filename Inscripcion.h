@@ -10,7 +10,8 @@ class Inscripcion {
 
    private:
    	Lista<Candidato> candidatos;
-    int candidatosPorPartido[5] = {0};  
+    int candidatosPorPartido[5] = {0};
+    Lista<Candidato> partidos[5];
 
    public:
     // Constructor
@@ -36,6 +37,9 @@ class Inscripcion {
 
     //Muestra en pantalla todos los candidatos
     void MostrarCandidatos();
+
+    // reportes
+    void ReporteGeneral();
 };
 
 #endif

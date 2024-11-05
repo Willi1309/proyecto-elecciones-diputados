@@ -37,6 +37,7 @@ void Inscripcion::Registrar() {
 
     if(verificarDisponibilidad(nuevo)) {
         candidatos.InsertarNodoCola(nuevo);
+        partidos[nuevo.getIdPartido()].InsertarNodoCola(nuevo);
         candidatosPorPartido[nuevo.getIdPartido()]++;
 
         cout << "\nCandidato registrado exitosamente:\n";
@@ -109,8 +110,8 @@ void Inscripcion::iterarCandidatos(string cedCandidato, int opcion) {
                 encontrado = true;
 
                 if(opcion == 3) { Buscar(candAux); }
-                if(opcion == 4) { Eliminar(candAux); continue; }
-                if(opcion == 5) { candAux = Modificar(candAux); }
+                if(opcion == 4) { candAux = Modificar(candAux); }
+                if(opcion == 5) { Eliminar(candAux); continue; }
 
             }
             candidatos.InsertarNodoCola(candAux);
@@ -134,4 +135,32 @@ void Inscripcion::MostrarCandidatos() {
         candidatoActual.mostrarInformacion();
         actual = candidatos.ObtProx(actual);
     }
+}
+
+void Inscripcion::ReporteGeneral() {
+    // hay que mostrar a los candidatos por partido
+    int i = 0;
+    while (i <= 5)
+    {
+        Lista<Candidato> partidoActual = partidos[i];
+
+        if (!partidoActual.Vacia()) {
+            nodo<Candidato>* actual = partidoActual.ObtPrimero();
+            std::cout << "==================================" << endl;
+            std::cout << "Partido " << partidoActual.ObtInfo(actual).getNombrePartido() << endl;
+            std::cout << "==================================" << endl;
+            while (actual) {
+                Candidato candidatoActual = partidoActual.ObtInfo(actual);
+                cout << "Candidato: " << candidatoActual.getNombre()  << " " << candidatoActual.getApellido() <<  endl;
+                cout << "Cedula: " << candidatoActual.getCedula() << endl;
+                actual = partidoActual.ObtProx(actual);
+            }
+
+            std::cout << endl;
+        }
+
+        i++;
+
+    }
+
 }

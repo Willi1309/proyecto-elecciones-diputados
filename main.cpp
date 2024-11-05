@@ -25,9 +25,10 @@ int main() {
             cout << "1. Registrar candidato" << endl;
             cout << "2. Mostrar candidatos" << endl;
             cout << "3. Buscar candidato" << endl;
-            cout << "4. Eliminar candidato" << endl;
-            cout << "5. Modificar candidato" << endl;
-            cout << "6. Salir" << endl;
+            cout << "4. Modificar candidato" << endl;
+            cout << "5. Eliminar candidato" << endl;
+            cout << "6. Resumen Inscripcion" << endl;
+            cout << "7. Salir" << endl;
             cout << "Elige una opcion:";
             cin >> opcion;
             cin.ignore(); // Limpiar el buffer de entrada
@@ -52,17 +53,8 @@ int main() {
                     inscripcion.iterarCandidatos(cedBuscar,opcion);
                     break;
                 }
-                    
+
                 case 4: {
-
-                    string cedEliminar;
-                    cout << "\tIngrese la cedula del candidato a eliminar:"; cin >> cedEliminar; cin.ignore(); // Limpiar el buffer de entrada
-
-                    inscripcion.iterarCandidatos(cedEliminar, opcion);
-                    break;
-                }
-
-                case 5: {
 
                     string cedulaModificar;
                     cout<<"\tIngrese la cedula del candidato a modificar:"; cin>>cedulaModificar; cin.ignore(); // Limpiar el buffer de entrada
@@ -71,14 +63,28 @@ int main() {
                     break;
                 }
 
-                case 6:
+                case 5: {
+
+                    string cedEliminar;
+                    cout << "\tIngrese la cedula del candidato a eliminar:"; cin >> cedEliminar; cin.ignore(); // Limpiar el buffer de entrada
+
+                    inscripcion.iterarCandidatos(cedEliminar, opcion);
+                    break;
+                }
+
+                case 6: {
+                    inscripcion.ReporteGeneral();
+                    break;
+                }
+
+                case 7:
                     cout << "Saliendo del sistema de gestion de candidatos." << endl;
                     break;
 
                 default:
                     cout << "Opcion no valida. Intenta de nuevo." << endl;
             }
-        } while (opcion != 6);
+        } while (opcion != 7);
 
     } else if (opcionInicial == 2) {
         cout << "Saliendo del programa." << endl;
