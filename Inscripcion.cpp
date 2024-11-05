@@ -78,7 +78,7 @@ Candidato Inscripcion::Modificar(Candidato cand) {
     nuevo.setIdPartido(idNuevoPartido);
 
     cout<<"Nuevo estatus del candidato: "; cin>>nuevoStatus;
-    cand.setStatus(nuevoStatus);
+    nuevo.setStatus(nuevoStatus);
 
     if(verificarDisponibilidad(nuevo)) {
         cout << "\nCandidato modificado exitosamente:\n";
