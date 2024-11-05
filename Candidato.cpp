@@ -73,10 +73,10 @@ void Candidato::setEstatusInicial() {
 
 }
 void Candidato::mostrarInformacion() {
-    cout << "Nombre: " << nombre << endl;
+    cout << "Cedula: " << cedula<< endl;
+    cout << "Nombre: " << nombre << " " << apellido << endl;
     cout << "Partido: " << getNombrePartido() << endl;
     cout << "\n" << endl;
-
 };
 
 bool Candidato::operator==(const Candidato& other) const {
