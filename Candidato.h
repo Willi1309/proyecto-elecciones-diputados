@@ -4,14 +4,15 @@
 #include <iostream>
 #include <string>
 #include "Libreria/Lista.h"
+#include "Libreria/Pila.h"
 using namespace std;
 
 class Candidato {
 private:
     string cedula, nombre, apellido, partido;
     int idPartido, votos;
-    //Lista<string> pilaEstatus;
-    string nombresPartidos[5] = {"Partido A", "Partido B", "Partido C", "Partido D", "Partido E"};
+    Pila status;
+    string nombresPartidos[5] = {"A", "B", "C", "D", "E"};
 
 public:
     Candidato();
@@ -28,14 +29,13 @@ public:
     int getIdPartido();
     void setVotos(int vot);
     int getVotos();
-
     // Métodos para modificar información del candidato
     void agregarVoto() { votos++; }
 
     // Métodos para pila estatus
-    void setEstatusInicial();
-    string getEstatus();
-    void ModificarEstatus(string);
+    void setStatus(string st);
+    string getStatus();
+
 
     // Método para obtener el nombre del partido según el ID
     string getNombrePartido();
