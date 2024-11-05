@@ -129,3 +129,49 @@ Candidato Inscripcion::BuscarCandidato(string ced) {
 
     return encontrado;
 }
+
+
+void Inscripcion::ModificarCandidato(string cedula){
+
+    Candidato marca = CrearMarca();
+
+    if(!candidatos.Llena()){
+
+        bool existe = false;
+        Candidato candAux;
+        candidatos.InsertarNodoCola(marca);
+
+        while(true){
+            candidatos.RemoverNodoCola(candAux);
+
+            if (candAux.getCedula() == marca.getCedula()) {
+                break;
+            }
+
+            if (candAux.getCedula() == cedula) {
+                cout << "\n\nIngrese los nuevos datos para el candidato con cedula "<<candAux.getCedula()<<" \n\n";
+                existe = true;
+                string nuevoNombre, nuevoApellido, nuevoStatus;
+                int idNuevoPartido;
+
+                cout<<"Nombre: "; cin>>nuevoNombre;
+                candAux.setNombre(nuevoNombre);
+
+                cout<<"Apellido: "; cin>>nuevoApellido;
+                candAux.setApellido(nuevoApellido);
+
+                cout<<"Nuevo ID del partido: "; cin>>idNuevoPartido;
+                candAux.setIdPartido(idNuevoPartido);
+
+                //cout<<"Nuevo estatus del candidato: "; cin>>nuevoStatus;
+                //candAux.setStatus(nuevoStatus);
+
+                cout << "Candidato modificado exitosamente.\n\n";
+            }
+            candidatos.InsertarNodoCola(candAux);
+        }
+        if (!existe) {
+            cout << "Candidato no encontrado." << endl;
+        }
+    }
+}

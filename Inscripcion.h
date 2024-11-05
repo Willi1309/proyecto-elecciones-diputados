@@ -32,6 +32,8 @@ class Inscripcion {
     void MostrarCandidatos();
     
     Candidato BuscarCandidato(string cedula);
+
+    void ModificarCandidato(string);
 };
 
 #endif

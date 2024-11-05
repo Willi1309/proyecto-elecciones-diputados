@@ -9,8 +9,6 @@ include_directories(Libreria)
 add_executable(proyecto_elecciones_diputados
     Libreria/Lista.cpp
     Libreria/Lista.h
-    Libreria/Nodo.cpp
-    Libreria/Nodo.h
     Candidato.cpp
     Candidato.h
     Inscripcion.cpp
