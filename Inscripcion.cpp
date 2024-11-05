@@ -16,7 +16,7 @@ bool Inscripcion::verificarDisponibilidad(Candidato cand){
 }
 
 void Inscripcion::Registrar() {
-    Candidato nuevo; string nuevaCedula, nuevoNombre, nuevoApellido, nuevoStatus; int idNuevoPartido;
+    Candidato nuevo; string nuevaCedula, nuevoNombre, nuevoApellido; int idNuevoPartido;
 
     cout << "\tRegistrando Candidato  ------------ \n ";
 
@@ -32,8 +32,8 @@ void Inscripcion::Registrar() {
     cout<<"ID del partido:"; cin>>idNuevoPartido;
     nuevo.setIdPartido(idNuevoPartido);
 
-    //cout<<"Nuevo estatus del candidato: "; cin>>nuevoStatus;
-    //cand.setStatus(nuevoStatus);
+    // Establece el estatus como activo al crear un nuevo candidato
+    nuevo.setStatus("Activo");
 
     if(verificarDisponibilidad(nuevo)) {
         candidatos.InsertarNodoCola(nuevo);
@@ -77,8 +77,8 @@ Candidato Inscripcion::Modificar(Candidato cand) {
     cout<<"ID del partido:"; cin>>idNuevoPartido;
     nuevo.setIdPartido(idNuevoPartido);
 
-    //cout<<"Nuevo estatus del candidato: "; cin>>nuevoStatus;
-    //cand.setStatus(nuevoStatus);
+    cout<<"Nuevo estatus del candidato: "; cin>>nuevoStatus;
+    cand.setStatus(nuevoStatus);
 
     if(verificarDisponibilidad(nuevo)) {
         cout << "\nCandidato modificado exitosamente:\n";

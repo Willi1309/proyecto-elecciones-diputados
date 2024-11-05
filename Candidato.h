@@ -29,15 +29,13 @@ public:
     int getIdPartido();
     void setVotos(int vot);
     int getVotos();
-    void setStatus(string st);
-    string getStatus();
     // Métodos para modificar información del candidato
     void agregarVoto() { votos++; }
 
     // Métodos para pila estatus
-    //void setEstatusInicial();
-    //string getEstatus();
-    void ModificarEstatus(string);
+    void setStatus(string st);
+    string getStatus();
+
 
     // Método para obtener el nombre del partido según el ID
     string getNombrePartido();
