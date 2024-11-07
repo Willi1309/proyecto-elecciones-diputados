@@ -142,6 +142,8 @@ void Inscripcion::ReporteGeneral() {
     string partidos[5] = {"A", "B", "C", "D", "E"}; 
 
     for (int i = 0; i < 5; i++) {
+    cout << "Partido :" << partidos[i] << endl; 
+    cout << "========================" << endl; 
         
     if (candidatos.Vacia()) {
         cout << "Lista vacía" << endl;
@@ -176,7 +178,7 @@ void Inscripcion::ReporteGeneral() {
     if (contador == 0) {
         cout << "No hay candidatos que pertenezcan al partido " << partidos[i] << "." << endl;
     }
-   
+   cout << "========================" << endl; 
 }
     }
 

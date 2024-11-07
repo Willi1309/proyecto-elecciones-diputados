@@ -29,7 +29,7 @@ int main() {
             cout << "5. Eliminar candidato" << endl;
             cout << "6. Resumen Inscripcion" << endl;
             cout << "7. Mostrar Candidatos por Partido" << endl;
-            cout << "7. Salir" << endl;
+            cout << "8. Salir" << endl;
             cout << "Elige una opcion:";
             cin >> opcion;
             cin.ignore(); // Limpiar el buffer de entrada
