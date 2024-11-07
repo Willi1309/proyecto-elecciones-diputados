@@ -164,3 +164,39 @@ void Inscripcion::ReporteGeneral() {
     }
 
 }
+
+void Inscripcion::MostrarCandidatosPorPartido(string buscarPartido) {
+    if (candidatos.Vacia()) {
+        cout << "Lista vacía" << endl;
+        return; // Termina el método si la lista está vacía
+    }
+    
+    Candidato marca;
+    marca.setCedula("$$$"); 
+    candidatos.InsFinal(marca);
+
+    int contador = 0;
+
+    auto it = candidatos.ObtPrimero();
+    
+    while (candidatos.ObtInfo(it).getCedula() != marca.getCedula()) {
+        Candidato actual = candidatos.ObtInfo(it);
+
+        if (actual.getNombrePartido() == buscarPartido) {
+            cout << "Candidato: " << actual.getNombre() << " " << actual.getApellido() << endl;
+            contador++;
+        }
+
+        candidatos.InsFinal(actual);
+        it = candidatos.ObtProx(it);
+    }
+
+    Candidato primero = candidatos.ObtInfo(it);
+    if (primero.getCedula() == marca.getCedula()) {
+        candidatos.EliComienzo(marca);
+    }
+
+    if (contador == 0) {
+        cout << "No hay candidatos que pertenezcan al partido " << buscarPartido << "." << endl;
+    }
+}
