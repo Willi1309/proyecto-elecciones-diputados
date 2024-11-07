@@ -90,7 +90,7 @@ Candidato Inscripcion::Modificar(Candidato cand) {
 }
 
 
-void Inscripcion::iterarCandidatos(string cedCandidato, int opcion) {
+void Inscripcion::iterarCandidatos(string busqueda, int opcion) {
 
     Candidato marca; marca.setCedula("$$$$$$");
 
@@ -106,7 +106,7 @@ void Inscripcion::iterarCandidatos(string cedCandidato, int opcion) {
 
             if (candAux.getCedula() == marca.getCedula()) { break; }
 
-            if (candAux.getCedula() == cedCandidato) {
+            if (candAux.getCedula() == busqueda) {
                 encontrado = true;
 
                 if(opcion == 1) { Buscar(candAux); }
