@@ -80,9 +80,10 @@ int main() {
 
                 case 7: {
                     string partido;
-                    cout << "Ingresa el nombre del partido:" << endl;
-                    cin >> partido;
-                    inscripcion.MostrarCandidatosPorPartido(partido);
+                    cout << "Ingresa el nombre del partido:"; cin >> partido; cin.ignore(); // Limpiar el buffer de entrada
+
+                    inscripcion.iterarCandidatos(partido, 4);
+                    //inscripcion.MostrarCandidatosPorPartido(partido);
                     break;
                 }
                 

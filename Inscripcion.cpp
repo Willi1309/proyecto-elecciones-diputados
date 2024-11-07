@@ -106,18 +106,32 @@ void Inscripcion::iterarCandidatos(string busqueda, int opcion) {
 
             if (candAux.getCedula() == marca.getCedula()) { break; }
 
-            if (candAux.getCedula() == busqueda) {
+            // CODIGO QUE SE EJECUTA PARA CADA ITERACION DE CANDIDATO
+            // ⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+
+            if(opcion == 4) { // mostrar todos los candidatos por partido
+                if(candAux.getNombrePartido() == busqueda) {
+                    encontrado = true;
+                    cout << "Candidato: " << candAux.getNombre() << " " << candAux.getApellido() << endl;
+                }
+            }
+
+            else if (candAux.getCedula() == busqueda) {
                 encontrado = true;
 
-                if(opcion == 1) { Buscar(candAux); }
-                if(opcion == 2) { candAux = Modificar(candAux); }
-                if(opcion == 3) { Eliminar(candAux); continue; }
+                if(opcion == 1) { Buscar(candAux); } // Buscar candidato individual
+                if(opcion == 2) { candAux = Modificar(candAux); } // Modificar candidato individual
+                if(opcion == 3) { Eliminar(candAux); continue; } // Eliminar candidato individual
 
             }
+
+            // ⬆️⬆️⬆️⬆️⬆️⬆️⬆️
+            // FIN DEL CODIGO QUE SE EJECUTA PARA CADA ITERACION DE CANDIDATO
+
             candidatos.InsertarNodoCola(candAux);
         }
 
-        if (!encontrado) { std::cout << "Candidato no encontrado." << std::endl; }
+        if (!encontrado) { std::cout << "No se han encontrado un candidato." << std::endl; }
     }
 }
 
@@ -165,6 +179,7 @@ void Inscripcion::ReporteGeneral() {
 
 }
 
+/*
 void Inscripcion::MostrarCandidatosPorPartido(string buscarPartido) {
     if (candidatos.Vacia()) {
         cout << "Lista vacía" << endl;
@@ -200,3 +215,4 @@ void Inscripcion::MostrarCandidatosPorPartido(string buscarPartido) {
         cout << "No hay candidatos que pertenezcan al partido " << buscarPartido << "." << endl;
     }
 }
+*/
