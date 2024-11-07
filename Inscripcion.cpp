@@ -109,9 +109,9 @@ void Inscripcion::iterarCandidatos(string cedCandidato, int opcion) {
             if (candAux.getCedula() == cedCandidato) {
                 encontrado = true;
 
-                if(opcion == 3) { Buscar(candAux); }
-                if(opcion == 4) { candAux = Modificar(candAux); }
-                if(opcion == 5) { Eliminar(candAux); continue; }
+                if(opcion == 1) { Buscar(candAux); }
+                if(opcion == 2) { candAux = Modificar(candAux); }
+                if(opcion == 3) { Eliminar(candAux); continue; }
 
             }
             candidatos.InsertarNodoCola(candAux);
@@ -139,22 +139,22 @@ void Inscripcion::MostrarCandidatos() {
 
 void Inscripcion::ReporteGeneral() {
     // hay que mostrar a los candidatos por partido
+    string partidos[5] = {"A", "B", "C", "D", "E"}; 
     int i = 0;
-    while (i <= 5)
+    while (i < 4)
     {
-        Lista<Candidato> partidoActual = partidos[i];
-
-        if (!partidoActual.Vacia()) {
-            nodo<Candidato>* actual = partidoActual.ObtPrimero();
+        Lista<Candidato> copiaCandidatos = candidatos; 
+        nodo<Candidato>* actual = copiaCandidatos.ObtPrimero();
+        while (candidatos.ObtProx(actual)) {
             std::cout << "==================================" << endl;
-            std::cout << "Partido " << partidoActual.ObtInfo(actual).getNombrePartido() << endl;
+            std::cout << "Partido " << partidos[i] << endl;
             std::cout << "==================================" << endl;
-            while (actual) {
-                Candidato candidatoActual = partidoActual.ObtInfo(actual);
+            Candidato candidatoActual = copiaCandidatos.ObtInfo(actual);
+            if (candidatoActual.getNombrePartido() == partidos[i]) {
                 cout << "Candidato: " << candidatoActual.getNombre()  << " " << candidatoActual.getApellido() <<  endl;
                 cout << "Cedula: " << candidatoActual.getCedula() << endl;
-                actual = partidoActual.ObtProx(actual);
             }
+            actual = copiaCandidatos.ObtProx(actual);
 
             std::cout << endl;
         }
