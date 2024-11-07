@@ -140,30 +140,45 @@ void Inscripcion::MostrarCandidatos() {
 void Inscripcion::ReporteGeneral() {
     // hay que mostrar a los candidatos por partido
     string partidos[5] = {"A", "B", "C", "D", "E"}; 
-    int i = 0;
-    while (i < 4)
-    {
-        Lista<Candidato> copiaCandidatos = candidatos; 
-        nodo<Candidato>* actual = copiaCandidatos.ObtPrimero();
-        while (candidatos.ObtProx(actual)) {
-            std::cout << "==================================" << endl;
-            std::cout << "Partido " << partidos[i] << endl;
-            std::cout << "==================================" << endl;
-            Candidato candidatoActual = copiaCandidatos.ObtInfo(actual);
-            if (candidatoActual.getNombrePartido() == partidos[i]) {
-                cout << "Candidato: " << candidatoActual.getNombre()  << " " << candidatoActual.getApellido() <<  endl;
-                cout << "Cedula: " << candidatoActual.getCedula() << endl;
-            }
-            actual = copiaCandidatos.ObtProx(actual);
 
-            std::cout << endl;
+    for (int i = 0; i < 5; i++) {
+        
+    if (candidatos.Vacia()) {
+        cout << "Lista vacía" << endl;
+        return; // Termina el método si la lista está vacía
+    }
+    
+    Candidato marca;
+    marca.setCedula("$$$"); 
+    candidatos.InsFinal(marca);
+
+    int contador = 0;
+
+    auto it = candidatos.ObtPrimero();
+    
+    while (candidatos.ObtInfo(it).getCedula() != marca.getCedula()) {
+        Candidato actual = candidatos.ObtInfo(it);
+
+        if (actual.getNombrePartido() == partidos[i]) {
+            cout << "Candidato: " << actual.getNombre() << " " << actual.getApellido() << endl;
+            contador++;
         }
 
-        i++;
-
+        candidatos.InsFinal(actual);
+        it = candidatos.ObtProx(it);
     }
 
+    Candidato primero = candidatos.ObtInfo(it);
+    if (primero.getCedula() == marca.getCedula()) {
+        candidatos.EliComienzo(marca);
+    }
+
+    if (contador == 0) {
+        cout << "No hay candidatos que pertenezcan al partido " << partidos[i] << "." << endl;
+    }
+   
 }
+    }
 
 void Inscripcion::MostrarCandidatosPorPartido(string buscarPartido) {
     if (candidatos.Vacia()) {
