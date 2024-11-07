@@ -109,9 +109,9 @@ void Inscripcion::iterarCandidatos(string cedCandidato, int opcion) {
             if (candAux.getCedula() == cedCandidato) {
                 encontrado = true;
 
-                if(opcion == 3) { Buscar(candAux); }
-                if(opcion == 4) { candAux = Modificar(candAux); }
-                if(opcion == 5) { Eliminar(candAux); continue; }
+                if(opcion == 1) { Buscar(candAux); }
+                if(opcion == 2) { candAux = Modificar(candAux); }
+                if(opcion == 3) { Eliminar(candAux); continue; }
 
             }
             candidatos.InsertarNodoCola(candAux);
@@ -140,7 +140,7 @@ void Inscripcion::MostrarCandidatos() {
 void Inscripcion::ReporteGeneral() {
     // hay que mostrar a los candidatos por partido
     int i = 0;
-    while (i <= 5)
+    while (i < 5)
     {
         Lista<Candidato> partidoActual = partidos[i];
 
