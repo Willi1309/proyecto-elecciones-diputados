@@ -28,6 +28,7 @@ class Inscripcion {
 
     //Modificar un candidato
     Candidato Modificar(Candidato);
+    void MostrarCandidatosPorPartido(string buscarPartido);
 
     //Eliminar un candidato
     void Eliminar(Candidato);

@@ -28,6 +28,7 @@ int main() {
             cout << "4. Modificar candidato" << endl;
             cout << "5. Eliminar candidato" << endl;
             cout << "6. Resumen Inscripcion" << endl;
+            cout << "7. Mostrar Candidatos por Partido" << endl;
             cout << "7. Salir" << endl;
             cout << "Elige una opcion:";
             cin >> opcion;
@@ -78,6 +79,18 @@ int main() {
                 }
 
                 case 7:
+
+                {
+                    string partido;
+                    cout << "Ingresa el nombre del partido:" << endl;
+                    cin >> partido;
+                    inscripcion.MostrarCandidatosPorPartido(partido);
+                    break;
+
+                }
+
+                
+                case 8:
                     cout << "Saliendo del sistema de gestion de candidatos." << endl;
                     break;
 
