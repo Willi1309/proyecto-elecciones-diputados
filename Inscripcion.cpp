@@ -8,7 +8,7 @@ bool Inscripcion::verificarDisponibilidad(Candidato cand){
         std::cout << "ID de partido no valido." << std::endl;
         return false;
     }
-    if (candidatosPorPartido[cand.getIdPartido()] >= 5) {
+    if (candidatosPorPartido[cand.getIdPartido()-1] >= 5) {
         std::cout << "El partido ya tiene 5 candidatos inscritos." << std::endl;
         return false;
     }
@@ -38,7 +38,7 @@ void Inscripcion::Registrar() {
     if(verificarDisponibilidad(nuevo)) {
         candidatos.InsertarNodoCola(nuevo);
         partidos[nuevo.getIdPartido()].InsertarNodoCola(nuevo);
-        candidatosPorPartido[nuevo.getIdPartido()]++;
+        candidatosPorPartido[nuevo.getIdPartido()-1]++;
 
         cout << "\nCandidato registrado exitosamente:\n";
         nuevo.mostrarInformacion();
@@ -49,7 +49,7 @@ void Inscripcion::Registrar() {
 void Inscripcion::Eliminar(Candidato cand) {
     std::cout << "\n\nCandidato Eliminado:\n";
     cand.mostrarInformacion();
-    candidatosPorPartido[cand.getIdPartido()]; // Actualizamos el contador de candidatos por partido
+    candidatosPorPartido[cand.getIdPartido()-1]--; // Actualizamos el contador de candidatos por partido
 }
 
 void Inscripcion::Buscar(Candidato cand) {
@@ -153,30 +153,47 @@ void Inscripcion::MostrarCandidatos() {
 
 void Inscripcion::ReporteGeneral() {
     // hay que mostrar a los candidatos por partido
-    int i = 0;
-    while (i < 5)
-    {
-        Lista<Candidato> partidoActual = partidos[i];
+    string partidos[5] = {"A", "B", "C", "D", "E"};
 
-        if (!partidoActual.Vacia()) {
-            nodo<Candidato>* actual = partidoActual.ObtPrimero();
-            std::cout << "==================================" << endl;
-            std::cout << "Partido " << partidoActual.ObtInfo(actual).getNombrePartido() << endl;
-            std::cout << "==================================" << endl;
-            while (actual) {
-                Candidato candidatoActual = partidoActual.ObtInfo(actual);
-                cout << "Candidato: " << candidatoActual.getNombre()  << " " << candidatoActual.getApellido() <<  endl;
-                cout << "Cedula: " << candidatoActual.getCedula() << endl;
-                actual = partidoActual.ObtProx(actual);
-            }
+    for (int i = 0; i < 5; i++) {
+        cout << "Partido :" << partidos[i] << endl;
+        cout << "========================" << endl;
 
-            std::cout << endl;
+        if (candidatos.Vacia()) {
+            cout << "Lista vacía" << endl;
+            break; // Termina el método si la lista está vacía
         }
 
-        i++;
+        Candidato marca;
+        marca.setCedula("$$$");
+        candidatos.InsFinal(marca);
 
+        int contador = 0;
+
+        auto it = candidatos.ObtPrimero();
+
+        while (candidatos.ObtInfo(it).getCedula() != marca.getCedula()) {
+            Candidato actual = candidatos.ObtInfo(it);
+
+            if (actual.getNombrePartido() == partidos[i]) {
+                cout << "Candidato: " << actual.getNombre() << " " << actual.getApellido() << endl;
+                contador++;
+            }
+
+            candidatos.InsFinal(actual);
+            it = candidatos.ObtProx(it);
+        }
+
+        Candidato primero = candidatos.ObtInfo(it);
+        if (primero.getCedula() == marca.getCedula()) {
+            candidatos.EliComienzo(marca);
+        }
+
+        if (contador == 0) {
+            cout << "No hay candidatos que pertenezcan al partido " << partidos[i] << "." << endl;
+        }
+        cout << "========================" << endl;
     }
-
 }
 
 /*
