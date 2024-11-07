@@ -161,7 +161,7 @@ void Inscripcion::ReporteGeneral() {
 
         if (candidatos.Vacia()) {
             cout << "Lista vacía" << endl;
-            break; // Termina el método si la lista está vacía
+            break; // Termina el metodo si la lista está vacía
         }
 
         Candidato marca;
