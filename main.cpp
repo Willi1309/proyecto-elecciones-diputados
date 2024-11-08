@@ -51,7 +51,7 @@ int main() {
                     string cedBuscar;
                     cout << "\tIngrese la cedula del candidato:"; cin >> cedBuscar; cin.ignore(); // Limpiar el buffer de entrada
 
-                    inscripcion.iterarCandidatos(cedBuscar,opcion);
+                    inscripcion.iterarCandidatos(cedBuscar,1);
                     break;
                 }
 
@@ -60,7 +60,7 @@ int main() {
                     string cedulaModificar;
                     cout<<"\tIngrese la cedula del candidato a modificar:"; cin>>cedulaModificar; cin.ignore(); // Limpiar el buffer de entrada
 
-                    inscripcion.iterarCandidatos(cedulaModificar, opcion);
+                    inscripcion.iterarCandidatos(cedulaModificar, 2);
                     break;
                 }
 
@@ -69,7 +69,7 @@ int main() {
                     string cedEliminar;
                     cout << "\tIngrese la cedula del candidato a eliminar:"; cin >> cedEliminar; cin.ignore(); // Limpiar el buffer de entrada
 
-                    inscripcion.iterarCandidatos(cedEliminar, opcion);
+                    inscripcion.iterarCandidatos(cedEliminar, 3);
                     break;
                 }
 
@@ -78,17 +78,14 @@ int main() {
                     break;
                 }
 
-                case 7:
-
-                {
+                case 7: {
                     string partido;
-                    cout << "Ingresa el nombre del partido:" << endl;
-                    cin >> partido;
-                    inscripcion.MostrarCandidatosPorPartido(partido);
+                    cout << "Ingresa el nombre del partido:"; cin >> partido; cin.ignore(); // Limpiar el buffer de entrada
+
+                    inscripcion.iterarCandidatos(partido, 4);
+                    //inscripcion.MostrarCandidatosPorPartido(partido);
                     break;
-
                 }
-
                 
                 case 8:
                     cout << "Saliendo del sistema de gestion de candidatos." << endl;
@@ -97,7 +94,7 @@ int main() {
                 default:
                     cout << "Opcion no valida. Intenta de nuevo." << endl;
             }
-        } while (opcion != 7);
+        } while (opcion != 8);
 
     } else if (opcionInicial == 2) {
         cout << "Saliendo del programa." << endl;
