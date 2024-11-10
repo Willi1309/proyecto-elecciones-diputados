@@ -29,7 +29,7 @@ void Inscripcion::Registrar() {
 
     for (int i = 0; i < cantidadCandidatos; i++) {
         string cedula, nombre, apellido;
-        int partido;
+        int partido = 0;
 
         cout << "\nRegistro del Candidato " << i + 1 << endl;
         
@@ -66,9 +66,10 @@ void Inscripcion::Registrar() {
             
         cout << "Ingrese el partido político: ";
         cin >> partido;
-        if (!partido) {
-            cout << "Ingrese un partido valido (1, 2, 3, 4, 5)" << endl;
-        }
+        if (cin.fail() || partido < 1 || partido > 5) {
+                cout << "Ingrese un partido valido (1, 2, 3, 4, 5)" << endl;
+                partido = 0; // Reset partido to ensure the loop continues
+            }
         }
         
       
