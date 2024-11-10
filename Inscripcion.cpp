@@ -8,7 +8,7 @@ bool Inscripcion::verificarDisponibilidad(Candidato cand){
         std::cout << "ID de partido no valido." << std::endl;
         return false;
     }
-    if (candidatosPorPartido[cand.getIdPartido()] >= 5) {
+    if (candidatosPorPartido[cand.getIdPartido()-1] >= 5) {
         std::cout << "El partido ya tiene 5 candidatos inscritos." << std::endl;
         return false;
     }
@@ -42,10 +42,12 @@ void Inscripcion::Registrar() {
 
         // Crear un objeto Candidato y agregarlo a la lista
         Candidato candidato(cedula, nombre, apellido, partido);
+      if(verificarDisponibilidad(candidato)) {
         candidatos.InsComienzo(candidato);
-    }
-
-    // Mostrar la lista de candidatos registrados
+        
+        
+      }
+        // Mostrar la lista de candidatos registrados
     cout << "\nLista de Candidatos Registrados:" << endl;
     nodo<Candidato>* p = candidatos.ObtPrimero();
     while (p != nullptr) {
@@ -53,7 +55,7 @@ void Inscripcion::Registrar() {
         cout << endl;
         p = candidatos.ObtProx(p); // Aquí se corrigió el nombre del método
     }
-}
+    }
 
 // void Inscripcion::Registrar() {
 //     Candidato nuevo; string nuevaCedula, nuevoNombre, nuevoApellido; int idNuevoPartido;
@@ -89,7 +91,7 @@ void Inscripcion::Registrar() {
 void Inscripcion::Eliminar(Candidato cand) {
     std::cout << "\n\nCandidato Eliminado:\n";
     cand.mostrarInformacion();
-    candidatosPorPartido[cand.getIdPartido()]; // Actualizamos el contador de candidatos por partido
+    candidatosPorPartido[cand.getIdPartido()-1]--; // Actualizamos el contador de candidatos por partido
 }
 
 void Inscripcion::Buscar(Candidato cand) {
@@ -130,7 +132,7 @@ Candidato Inscripcion::Modificar(Candidato cand) {
 }
 
 
-void Inscripcion::iterarCandidatos(string cedCandidato, int opcion) {
+void Inscripcion::iterarCandidatos(string busqueda, int opcion) {
 
     Candidato marca; marca.setCedula("$$$$$$");
 
@@ -146,18 +148,32 @@ void Inscripcion::iterarCandidatos(string cedCandidato, int opcion) {
 
             if (candAux.getCedula() == marca.getCedula()) { break; }
 
-            if (candAux.getCedula() == cedCandidato) {
+            // CODIGO QUE SE EJECUTA PARA CADA ITERACION DE CANDIDATO
+            // ⬇️⬇️⬇️⬇️⬇️⬇️⬇️
+
+            if(opcion == 4) { // mostrar todos los candidatos por partido
+                if(candAux.getNombrePartido() == busqueda) {
+                    encontrado = true;
+                    cout << "Candidato: " << candAux.getNombre() << " " << candAux.getApellido() << endl;
+                }
+            }
+
+            else if (candAux.getCedula() == busqueda) {
                 encontrado = true;
 
-                if(opcion == 1) { Buscar(candAux); }
-                if(opcion == 2) { candAux = Modificar(candAux); }
-                if(opcion == 3) { Eliminar(candAux); continue; }
+                if(opcion == 1) { Buscar(candAux); } // Buscar candidato individual
+                if(opcion == 2) { candAux = Modificar(candAux); } // Modificar candidato individual
+                if(opcion == 3) { Eliminar(candAux); continue; } // Eliminar candidato individual
 
             }
+
+            // ⬆️⬆️⬆️⬆️⬆️⬆️⬆️
+            // FIN DEL CODIGO QUE SE EJECUTA PARA CADA ITERACION DE CANDIDATO
+
             candidatos.InsertarNodoCola(candAux);
         }
 
-        if (!encontrado) { std::cout << "Candidato no encontrado." << std::endl; }
+        if (!encontrado) { std::cout << "No se han encontrado un candidato." << std::endl; }
     }
 }
 
@@ -179,49 +195,51 @@ void Inscripcion::MostrarCandidatos() {
 
 void Inscripcion::ReporteGeneral() {
     // hay que mostrar a los candidatos por partido
-    string partidos[5] = {"A", "B", "C", "D", "E"}; 
+    string partidos[5] = {"A", "B", "C", "D", "E"};
 
     for (int i = 0; i < 5; i++) {
-    cout << "Partido :" << partidos[i] << endl; 
-    cout << "========================" << endl; 
-        
-    if (candidatos.Vacia()) {
-        cout << "Lista vacía" << endl;
-        return; // Termina el método si la lista está vacía
-    }
-    
-    Candidato marca;
-    marca.setCedula("$$$"); 
-    candidatos.InsFinal(marca);
+        cout << "Partido :" << partidos[i] << endl;
+        cout << "========================" << endl;
 
-    int contador = 0;
-
-    auto it = candidatos.ObtPrimero();
-    
-    while (candidatos.ObtInfo(it).getCedula() != marca.getCedula()) {
-        Candidato actual = candidatos.ObtInfo(it);
-
-        if (actual.getNombrePartido() == partidos[i]) {
-            cout << "Candidato: " << actual.getNombre() << " " << actual.getApellido() << endl;
-            contador++;
+        if (candidatos.Vacia()) {
+            cout << "Lista vacía" << endl;
+            break; // Termina el metodo si la lista está vacía
         }
 
-        candidatos.InsFinal(actual);
-        it = candidatos.ObtProx(it);
-    }
+        Candidato marca;
+        marca.setCedula("$$$");
+        candidatos.InsFinal(marca);
 
-    Candidato primero = candidatos.ObtInfo(it);
-    if (primero.getCedula() == marca.getCedula()) {
-        candidatos.EliComienzo(marca);
-    }
+        int contador = 0;
 
-    if (contador == 0) {
-        cout << "No hay candidatos que pertenezcan al partido " << partidos[i] << "." << endl;
+        auto it = candidatos.ObtPrimero();
+
+        while (candidatos.ObtInfo(it).getCedula() != marca.getCedula()) {
+            Candidato actual = candidatos.ObtInfo(it);
+
+            if (actual.getNombrePartido() == partidos[i]) {
+                cout << "Candidato: " << actual.getNombre() << " " << actual.getApellido() << endl;
+                contador++;
+            }
+
+            candidatos.InsFinal(actual);
+            it = candidatos.ObtProx(it);
+        }
+
+        Candidato primero = candidatos.ObtInfo(it);
+        if (primero.getCedula() == marca.getCedula()) {
+            candidatos.EliComienzo(marca);
+        }
+
+        if (contador == 0) {
+            cout << "No hay candidatos que pertenezcan al partido " << partidos[i] << "." << endl;
+        }
+        cout << "========================" << endl;
     }
-   cout << "========================" << endl; 
 }
     }
 
+/*
 void Inscripcion::MostrarCandidatosPorPartido(string buscarPartido) {
     if (candidatos.Vacia()) {
         cout << "Lista vacía" << endl;
@@ -258,3 +276,4 @@ void Inscripcion::MostrarCandidatosPorPartido(string buscarPartido) {
     }
 }
 
+*/
