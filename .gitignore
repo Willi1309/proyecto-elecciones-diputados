@@ -13,3 +13,4 @@ Makefile
 *.a
 *.so
 *.dylib
+/.metadata/
