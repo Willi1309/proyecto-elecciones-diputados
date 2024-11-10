@@ -4,6 +4,10 @@
 Inscripcion::Inscripcion() {}
 
 bool Inscripcion::verificarDisponibilidad(Candidato cand){
+
+    // falta verificar que el candidato no este inscrito 
+
+
     if (cand.getIdPartido() < 0 || cand.getIdPartido() > 5) {
         std::cout << "ID de partido no valido." << std::endl;
         return false;
@@ -28,17 +32,47 @@ void Inscripcion::Registrar() {
         int partido;
 
         cout << "\nRegistro del Candidato " << i + 1 << endl;
+        
+        while (cedula.empty()) {
+        cin.ignore();    
         cout << "Ingrese la cédula: ";
         getline(cin, cedula);
+        if (cedula.empty()) {
+            cout << "La cédula no puede estar vacia" << endl;
+        }
+        }
 
-        cout << "Ingrese el nombre: ";
+         while (nombre.empty()) {
+            
+        cin.ignore();
+        cout << "Ingrese la nombre: ";
         getline(cin, nombre);
+        if (nombre.empty()) {
+            cout << "El nombre no puede estar vacia" << endl;
+        }
+        }
 
-        cout << "Ingrese el apellido: ";
+         while (apellido.empty()) {
+    
+        cout << "Ingrese la apellido: " ;
         getline(cin, apellido);
-
+        if (apellido.empty()) {
+            cout << "El apellido no puede estar vacia" << endl;
+        }
+        }
+         
+        
+        while (partido < 1 || partido > 5) {
+            
         cout << "Ingrese el partido político: ";
         cin >> partido;
+        if (!partido) {
+            cout << "Ingrese un partido valido (1, 2, 3, 4, 5)" << endl;
+        }
+        }
+        
+      
+        
 
         // Crear un objeto Candidato y agregarlo a la lista
         Candidato candidato(cedula, nombre, apellido, partido);
@@ -56,6 +90,15 @@ void Inscripcion::Registrar() {
         p = candidatos.ObtProx(p); // Aquí se corrigió el nombre del método
     }
     }
+}
+
+
+
+
+
+
+
+
 
 // void Inscripcion::Registrar() {
 //     Candidato nuevo; string nuevaCedula, nuevoNombre, nuevoApellido; int idNuevoPartido;
@@ -237,7 +280,9 @@ void Inscripcion::ReporteGeneral() {
         cout << "========================" << endl;
     }
 }
-    }
+
+
+
 
 /*
 void Inscripcion::MostrarCandidatosPorPartido(string buscarPartido) {
